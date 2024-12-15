@@ -1,0 +1,22 @@
+{
+  "name": "devcontainer-php-liveserver",
+  "dockerFile": "workspace/Dockerfile",
+  "runArgs": [
+    "--platform=linux/amd64",
+    "--name",
+    "${containerWorkspaceFolderBasename}-workspace-${localEnv:USER}"
+  ],
+  "forwardPorts": [8443, 8080],
+  "mounts": [
+    "source=${localWorkspaceFolder}/.devcontainer/cert,target=/etc/ssl/self-signed,type=bind,consistency=cached",
+    "source=${localWorkspaceFolder}/.devcontainer/php.ini,target=/usr/local/etc/php/php.ini,type=bind,consistency=cached",
+  ],
+  "containerEnv": {
+    "CONTAINER_WORKSPACE_DIR": "${containerWorkspaceFolder}"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "latest"
+    }
+  }
+}

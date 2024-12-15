@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -e
+
+exec apache2ctl -D FOREGROUND
