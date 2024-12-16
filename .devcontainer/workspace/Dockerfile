@@ -1,4 +1,4 @@
-FROM --platform=amd64 mcr.microsoft.com/devcontainers/php:8.3-apache-bookworm
+FROM --platform=amd64 mcr.microsoft.com/devcontainers/php:8.1-apache-bookworm
 
 ENV TZ Asia/Tokyo
 ENV LANG=C.UTF-8
