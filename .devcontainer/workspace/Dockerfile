@@ -1,4 +1,4 @@
-FROM --platform=amd64 mcr.microsoft.com/devcontainers/php:8.3-apache-bookworm
+FROM --platform=amd64 mcr.microsoft.com/devcontainers/php:8.2-apache-bookworm
 
 ENV TZ Asia/Tokyo
 ENV LANG=C.UTF-8
@@ -13,7 +13,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN a2enmod ssl && \
+RUN a2enmod ssl rewrite && \
     a2ensite default-ssl && \
     docker-php-ext-install exif intl zip mysqli && \
     pecl install igbinary && \
@@ -24,6 +24,7 @@ RUN a2enmod ssl && \
     ./configure && \
     make && make install && \
     docker-php-ext-enable igbinary imagick && \
+    rm -f /usr/local/etc/php/conf.d/xdebug.ini && \
     rm -rf /root/imagick-3.7.0
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
